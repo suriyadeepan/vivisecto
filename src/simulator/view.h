@@ -28,5 +28,10 @@
 
 //void view_x4(SIM_DIM_X,SIM_DIM_Y)
 void view_x4(Mat *,int,int);
+void view_draw_nodes(Mat *, Point *, int);
+
 
 #endif
+
+
+

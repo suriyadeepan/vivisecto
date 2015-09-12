@@ -15,13 +15,13 @@ void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){
 void view_draw_nodes(Mat *view, Point *node_loc, int seed){ /* Remove seed */
 
 	(*view).setTo(cv::Scalar(0,0,0));
-	for(int i=0;i<10;i++){
+	for(int i=0;i<10;i++)
 		circle( *view, Point( seed + node_loc[i].x * 4, seed + node_loc[i].y * 4), 20, Scalar(150,90,255), -1,8,0);
 
 }
 
 
-int main(){
+/*int main(){
 
 	//node locations
 	Point node_loc[10];
@@ -51,4 +51,4 @@ int main(){
 	waitKey(0);
 	return 0;
 
-}
+}*/
