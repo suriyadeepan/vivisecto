@@ -20,8 +20,8 @@ int add_to_array(Node* array[], int len, char* string){
   if (array[id] == NULL) {
     array[id] = Node_new(id, x ,y, t, s);
     if (array[id] == NULL)
-      printf("Error allocating memory... exiting...\n"), exit(1)
-	} else {
+      printf("Error allocating memory... exiting...\n"), exit(1);
+  } else {
     array[id]->x = x;
     array[id]->y = y;
     array[id]->t = t;
