@@ -1,16 +1,6 @@
-#include "opencv2/opencv.hpp"
-#include "stdio.h"
+#include "view.h"
 
-using namespace cv;
-
-
-void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ 
-
-	*view = Mat(SIM_DIM_X*4, SIM_DIM_Y*4, CV_8UC3);
-
-}
-
-
+void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, SIM_DIM_Y*4, CV_8UC3); }
 
 void view_draw_nodes(Mat *view, Point *node_loc, int seed){ /* Remove seed */
 
@@ -21,7 +11,7 @@ void view_draw_nodes(Mat *view, Point *node_loc, int seed){ /* Remove seed */
 }
 
 
-/*int main(){
+int main(){
 
 	//node locations
 	Point node_loc[10];
@@ -51,4 +41,4 @@ void view_draw_nodes(Mat *view, Point *node_loc, int seed){ /* Remove seed */
 	waitKey(0);
 	return 0;
 
-}*/
+}
