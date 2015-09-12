@@ -70,7 +70,7 @@ int main(int argc, char** argv){
       //delay(1000);
       unsigned int i;
       for (i = 0; i < node_count; i++)
-	Node_print(nodes[i]);
+	//Node_print(nodes[i]);
       
       printf("##################### %d  ##########################\n", line_no);
     }
