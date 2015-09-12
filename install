@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "#0 Install Dependencies"
+echo
+##################
+# install build dependencies
+#
+##################
+if [ -f /etc/debian_version ]; then 
+    sudo apt-get install libopencv-*
+elif [ -f /etc/redhat-release ]; then 
+    sudo dnf install opencv
+else 
+		sudo yum install opencv
+    echo "Try installing packages manually. Not a deb / rpm based distribution"
+    exit
+fi
