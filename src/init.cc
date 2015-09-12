@@ -86,7 +86,7 @@ int main(int argc, char** argv){
   for (i = 0; i < node_count; i++)
     free(nodes[i]);
   
-
+  fclose(fp);
   return 0;
 
 }

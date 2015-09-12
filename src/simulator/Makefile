@@ -1,3 +1,5 @@
 all: *.cc
-	gcc -Wall -g -c *.cc 
+	gcc -g -Wall -c *.cc 
+	gcc view.o view.cc -o view
+
 
