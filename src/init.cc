@@ -13,9 +13,13 @@ Node** nodes = NULL;
   or updated otherwise with the currently read parameters
 */
 int add_to_array(Node* array[], int len, char* string){
+  double time;
   int id, x, y, t, s;
-  if (5 != sscanf(string, "%d %d %d %d %d %d", &id, &x, &y, &t, &s))
-    return NULL;
+  if (6 != sscanf(string, "%lf %d %d %d %d %d", &time, &id, &x, &y, &t, &s))
+    return -1;
+
+  if (id >= len)
+    return -1;
 
   if (array[id] == NULL) {
     array[id] = Node_new(id, x ,y, t, s);
@@ -24,8 +28,17 @@ int add_to_array(Node* array[], int len, char* string){
   } else {
     array[id]->x = x;
     array[id]->y = y;
-    array[id]->t = t;
+    array[id]->ev_type = t;
     array[id]->sender = s;
+  }
+
+  switch(t) {
+  case 1:
+    ++array[id]->pkts_tx;
+    break;
+  case 2:
+    ++array[id]->pkts_rx;
+    break;
   }
 
   return id;
@@ -39,37 +52,23 @@ int main(int argc, char** argv){
   // initiate model
   Mat model;
 
-  int num_nodes = model_init(ffp,&model);
-  nodes = (Node**)malloc(sizeof (*nodes) * num_nodes);
+  int node_count = model_init(fp);
+  nodes = (Node**)malloc(sizeof(*nodes) * node_count);
+  
+  char line [60]; 
+  double sim_t, sim_prev=-1;
 	
-  int redraw_needed = 0;
-  while (!feof(fp)) {
-	  
-    char line [60]; 
-    double sim_t;
-    fpos_t fpos;
-
-    if (fp == NULL)
-      return 0;
-
-    fgetpos(fp,&fpos);
-    while (fgets (line, sizeof line, fp) != NULL){ 
-      sscanf(line, "%lf", &sim_t);
-      if (sim_t > 0.0) {
-	fsetpos(fp,&fpos);
-	break;
-      }
-      
-      
-
-      fgetpos(fp,&fpos);
+  while (fgets (line, sizeof line, fp) != NULL) {	  
+    sscanf(line, "%lf", &sim_t);
+    if (sim_t > sim_prev) {
+      //draw(nodes);
+      //delay(1000);
     }
 
-
+    sim_prev = sim_t;
+    add_to_array(nodes, node_count, line);
   }
-	
-  model_update(file,&model);
-		
+
   return 0;
 
 }

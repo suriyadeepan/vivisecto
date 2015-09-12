@@ -12,7 +12,7 @@ Node* Node_new(int _id, int _x, int _y, int _ev, int _sender) {
   pnode->y = _y;
   pnode->ev_type = _ev;
   pnode->sender = _sender;
-
+  pnode->pkts_tx = pnode->pkts_rx = 0;
   return pnode;
 }
 
