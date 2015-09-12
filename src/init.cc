@@ -11,8 +11,8 @@ Node** nodes = NULL;
 /*
   the line read from the file is passed and node is created if not already existing 
   or updated otherwise with the currently read parameters
- */
-int add_to_array(Node* list[], int len, char* string){
+*/
+int add_to_array(Node* array[], int len, char* string){
   int id, x, y, t, s;
   if (5 != sscanf(string, "%d %d %d %d %d %d", &id, &x, &y, &t, &s))
     return NULL;
@@ -21,7 +21,7 @@ int add_to_array(Node* list[], int len, char* string){
     array[id] = Node_new(id, x ,y, t, s);
     if (array[id] == NULL)
       printf("Error allocating memory... exiting...\n"), exit(1)
-  } else {
+	} else {
     array[id]->x = x;
     array[id]->y = y;
     array[id]->t = t;
@@ -33,21 +33,43 @@ int add_to_array(Node* list[], int len, char* string){
 
 int main(int argc, char** argv){
 
-	static const char filename[] = "events.mono";
-	FILE *file = fopen ( filename, "r" );
+  static const char filename[] = "events.mono";
+  FILE *fp = fopen ( filename, "r" );
 
-	// initiate model
-	Mat model;
+  // initiate model
+  Mat model;
 
-	int num_nodes = model_init(file,&model);
-	nodes = (Node**)malloc(sizeof (*nodes) * num_nodes);
+  int num_nodes = model_init(ffp,&model);
+  nodes = (Node**)malloc(sizeof (*nodes) * num_nodes);
 	
-	while (!feof(fp)) {
+  int redraw_needed = 0;
+  while (!feof(fp)) {
 	  
-	}
+    char line [60]; 
+    double sim_t;
+    fpos_t fpos;
+
+    if (fp == NULL)
+      return 0;
+
+    fgetpos(fp,&fpos);
+    while (fgets (line, sizeof line, fp) != NULL){ 
+      sscanf(line, "%lf", &sim_t);
+      if (sim_t > 0.0) {
+	fsetpos(fp,&fpos);
+	break;
+      }
+      
+      
+
+      fgetpos(fp,&fpos);
+    }
+
+
+  }
 	
-	model_update(file,&model);
+  model_update(file,&model);
 		
-	return 0;
+  return 0;
 
 }
