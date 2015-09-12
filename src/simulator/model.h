@@ -22,10 +22,12 @@ class Node {
 
 
 
-void model_init(FILE *,Mat *);
-void model_update(FILE *,Mat *);
-void model_echo(Mat *);
+int model_init(FILE *);
+void model_update(FILE *);
+//void model_echo(Mat *);
 //
 //
+Node* Node_new(int,int,int,int,int );
+void Node_print(Node *);
 
 #endif

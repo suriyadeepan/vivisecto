@@ -17,10 +17,10 @@ Node* Node_new(int _id, int _x, int _y, int _ev, int _sender) {
 }
 
 void Node_print(Node* p){
-  printf("%d\t(%d,%d)\t%d\t%d",p->id, p->x, p->y, p->ev_type, p->sender  ? p->sender->id : -1);
+  printf("%d\t(%d,%d)\t%d\t%d",p->id, p->x, p->y, p->ev_type, p->sender  ? p->sender : -1);
 }
 
-int model_init(FILE *fp, Mat *model){
+int model_init(FILE *fp){
 
   int node_count = 0;
   char line [60]; 
@@ -52,7 +52,7 @@ void model_update(FILE *fp, Mat *model){
   fpos_t fpos;
 
   if (fp == NULL)
-    return 0;
+    return;
 
   fgetpos(fp,&fpos);
   while (fgets (line, sizeof line, fp) != NULL){ 
@@ -62,25 +62,10 @@ void model_update(FILE *fp, Mat *model){
       break;
     }
       
-    node_count++;
+    //node_count++;
     fgetpos(fp,&fpos);
   }
   
 }
 
-void model_echo(Mat *model){
-
-  int dim_x = model->rows;
-  int dim_y = model->cols;
-
-  for(int i = 0; i<dim_x;i++){
-    printf("\n");
-    for(int j=0; j<dim_y;j++){
-      printf("%d ",(*model).at<int>(i,j));
-    }
-
-  }
-	
-
-}
 
