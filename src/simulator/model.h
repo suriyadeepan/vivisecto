@@ -5,6 +5,10 @@
 
 using namespace cv;
 
-void model_update(Mat *,int,int,int,int,int);
+void model_init(FILE *,Mat *);
+void model_update(FILE *,Mat *);
+void model_echo(Mat *);
+//
+//
 
 #endif
