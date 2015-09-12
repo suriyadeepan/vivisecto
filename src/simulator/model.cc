@@ -17,7 +17,8 @@ Node* Node_new(int _id, int _x, int _y, int _ev, int _sender) {
 }
 
 void Node_print(Node* p){
-  printf("%d\t(%d,%d)\t%d\t%d",p->id, p->x, p->y, p->ev_type, p->sender  ? p->sender : -1);
+  if (p != NULL)
+    printf("%d\t(%d,%d)\t%d\t%d\n",p->id, p->x, p->y, p->ev_type, p->sender  ? p->sender : -1);
 }
 
 int model_init(FILE *fp){

@@ -58,16 +58,34 @@ int main(int argc, char** argv){
   char line [60]; 
   double sim_t, sim_prev=-1;
 	
-  while (fgets (line, sizeof line, fp) != NULL) {	  
+  fgets (line, sizeof line, fp);
+  sscanf(line, "%lf", &sim_t);
+  sim_prev = sim_t;
+  int line_no = 1;
+  do {
     sscanf(line, "%lf", &sim_t);
+    
     if (sim_t > sim_prev) {
       //draw(nodes);
       //delay(1000);
+      unsigned int i;
+      for (i = 0; i < node_count; i++)
+	Node_print(nodes[i]);
+      
+      printf("##################### %d  ##########################\n", line_no);
     }
 
     sim_prev = sim_t;
     add_to_array(nodes, node_count, line);
-  }
+    line_no++;
+  } while (fgets (line, sizeof line, fp) != NULL);
+
+
+
+  int i;
+  for (i = 0; i < node_count; i++)
+    free(nodes[i]);
+  
 
   return 0;
 

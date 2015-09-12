@@ -1,3 +1,3 @@
 all: *.cc
-	gcc -Wall -c *.cc 
+	gcc -Wall -g -c *.cc 
 
