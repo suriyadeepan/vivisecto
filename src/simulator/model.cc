@@ -1,6 +1,26 @@
 #include "model.h"
 #include "stdio.h"
 
+Node* Node_new(int _id, int _x, int _y, event_type _e, Node* _sender)
+{
+
+	Node* new_node = (Node*)malloc(sizeof *new_node);
+	if (new_node == NULL)
+		return NULL;
+
+	new_node->id = _id;
+	new_node->x = _x;
+	new_node->y = _y;
+	new_node->event_type = _etype;
+	new_node->sender = _sender;
+	return new_node;
+}
+
+void Node_print(Node* node)
+{
+	printf("%4d\t(%d, %d)\t%d\t%5d", node->id, node->x, node->y, node->event_type, node->sender ? node->sender->id : 0)
+} 
+
 void model_init(FILE *fp, Mat *model){
 
 	int node_count = 0;
