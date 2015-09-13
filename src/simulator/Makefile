@@ -1,5 +1,5 @@
-view:  view.cc 
-	g++ view.cc `pkg-config opencv --libs` -o view
+view:  *.cc 
+	g++ -c *.cc `pkg-config opencv --libs` 
 
 clean:
 	rm -f *.o 

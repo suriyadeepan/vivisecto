@@ -69,4 +69,9 @@ void model_update(FILE *fp, Mat *model){
   
 }
 
+void Model_print(Node* nodes[],int node_count){
 
+	for(int i=0;i<node_count;i++)
+		Node_print(nodes[i]);
+
+}

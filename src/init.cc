@@ -3,10 +3,15 @@
 
 #include "simulator/helper.h"
 #include "simulator/model.h"
+#include "simulator/view.h"
+
+#define SIM_DIX 200
+#define SIM_DIY 200
 
 using namespace cv;
 
 Node** nodes = NULL;
+Mat view;
 
 /*
   the line read from the file is passed and node is created if not already existing 
@@ -15,13 +20,13 @@ Node** nodes = NULL;
 int add_to_array(Node* array[], int len, char* string){
   double time;
   int id, x, y, t, s;
-  if (6 != sscanf(string, "%lf %d %d %d %d %d", &time, &id, &x, &y, &t, &s))
+  if (6 != sscanf(string, "%lf %d %d %d %d %d", &time, &id, &t, &x, &y, &s))
     return -1;
 
   if (id >= len)
     return -1;
 
-	printf("\nParams: %lf %d %d %d %d %d", time, id, x, y, t, s);
+	//printf("\nParams: %lf %d %d %d %d %d", time, id, x, y, t, s);
 
 //	printf("\n%x",array[id]);
 
@@ -30,20 +35,24 @@ int add_to_array(Node* array[], int len, char* string){
     if (array[id] == NULL)
       printf("Error allocating memory... exiting...\n"), exit(1);
   } else {
-    array[id]->x = x;
-    array[id]->y = y;
-    array[id]->ev_type = t;
-    array[id]->sender = s;
-  }
 
-  switch(t) {
-  case 1:
-    ++array[id]->pkts_tx;
-    break;
-  case 2:
-    ++array[id]->pkts_rx;
-    break;
-  }
+		switch(t) {
+
+			case 0:
+				array[id]->x = x;
+				array[id]->y = y;
+				break;
+
+			case 1:
+				++array[id]->pkts_tx;
+				break;
+
+			case 2:
+				++array[id]->pkts_rx;
+		}
+		array[id]->sender = s;
+		array[id]->ev_type = t;
+ }
 
   return id;
 }
@@ -61,6 +70,10 @@ int main(int argc, char** argv){
 
   for (int i = 0; i < node_count; i++)
 		nodes[i] = NULL;
+
+	// init view
+	view_x4(&view,SIM_DIX,SIM_DIY);
+	
   
   char line [60]; 
   double sim_t, sim_prev=-1;
@@ -70,25 +83,59 @@ int main(int argc, char** argv){
   sim_prev = sim_t;
   int line_no = 1;
 
+	char user_ip = ' ';
+	int delay = 1;
+
   do {
     sscanf(line, "%lf", &sim_t);
 
-		printf("\nSIM_T : %lf",sim_t);
-    
     if (sim_t > sim_prev) {
-      //draw(nodes);
-      //delay(1000);
-      for (int i = 0; i < node_count; i++)
-				Node_print(nodes[i]);
-      
-      printf("##################### %d  ##########################\n", line_no);
-    }
+			view_drawRadioComm(&view,nodes,node_count);
+			view_drawNodes(&view,nodes,node_count);
+			// Smooth
+			blur( view, view, Size( 4, 4 ) );
+
+			imshow("View Mode",view);
+			waitKey(delay);
+
+			user_ip = (char)waitKey(delay);
+
+			switch(user_ip){
+
+				case '+':
+					if(delay > 10)
+						delay -= 10;	
+					else
+						delay = 1;
+					break;
+
+				case '-':
+					if(delay < 200)
+						delay += 50;
+					else
+						delay = 200;
+					break;
+
+				case 'p':
+					if(delay != -1)
+						delay = -1;
+					else
+						delay = 80;
+					break;
+
+				case 'n':
+					delay = -1;
+
+			}
+
+
+		}
 
     sim_prev = sim_t;
     add_to_array(nodes, node_count, line);
     line_no++;
 
-  } while (fgets (line, sizeof line, fp) != NULL);
+  } while (fgets (line, sizeof line, fp) != NULL && user_ip != 'q');
 
 
   int i;

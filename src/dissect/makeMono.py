@@ -28,7 +28,7 @@ ri_max = len(radio)
 while Decimal(sim_t) < Decimal(sim_te) and ri < ri_max:
 	if( Decimal(radio[ri][0]) > Decimal(mobile[mi][0]) ):
 		sim_t = Decimal(mobile[mi][0])
-		print Decimal(mobile[mi][0]), mobile[mi][1], "0", int(float(mobile[mi][2])), int(float(mobile[mi][2])), "-1"
+		print Decimal(mobile[mi][0]), mobile[mi][1], "0", int(float(mobile[mi][2])), int(float(mobile[mi][3])), "-1"
 		mi = mi + 1
 	elif( Decimal(radio[ri][0]) < Decimal(mobile[mi][0]) ):
 		sim_t = Decimal(radio[ri][0])
