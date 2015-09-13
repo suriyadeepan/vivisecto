@@ -21,6 +21,10 @@ int add_to_array(Node* array[], int len, char* string){
   if (id >= len)
     return -1;
 
+	printf("\nParams: %lf %d %d %d %d %d", time, id, x, y, t, s);
+
+//	printf("\n%x",array[id]);
+
   if (array[id] == NULL) {
     array[id] = Node_new(id, x ,y, t, s);
     if (array[id] == NULL)
@@ -54,6 +58,9 @@ int main(int argc, char** argv){
 
   int node_count = model_init(fp);
   nodes = (Node**)malloc(sizeof(*nodes) * node_count);
+
+  for (int i = 0; i < node_count; i++)
+		nodes[i] = NULL;
   
   char line [60]; 
   double sim_t, sim_prev=-1;
@@ -62,15 +69,17 @@ int main(int argc, char** argv){
   sscanf(line, "%lf", &sim_t);
   sim_prev = sim_t;
   int line_no = 1;
+
   do {
     sscanf(line, "%lf", &sim_t);
+
+		printf("\nSIM_T : %lf",sim_t);
     
     if (sim_t > sim_prev) {
       //draw(nodes);
       //delay(1000);
-      unsigned int i;
-      for (i = 0; i < node_count; i++)
-	Node_print(nodes[i]);
+      for (int i = 0; i < node_count; i++)
+				Node_print(nodes[i]);
       
       printf("##################### %d  ##########################\n", line_no);
     }
@@ -78,8 +87,8 @@ int main(int argc, char** argv){
     sim_prev = sim_t;
     add_to_array(nodes, node_count, line);
     line_no++;
-  } while (fgets (line, sizeof line, fp) != NULL);
 
+  } while (fgets (line, sizeof line, fp) != NULL);
 
 
   int i;
