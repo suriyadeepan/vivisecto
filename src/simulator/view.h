@@ -3,6 +3,10 @@
 
 #include "opencv2/opencv.hpp"
 #include "stdio.h"
+#include "time.h"
+#include "stdlib.h"
+
+using namespace cv;
 
 /* 
  * We open with a sensor network with multitude of nodes. Actually just 10 nodes, I hate seg fault. Nodes are scattered ackwardly across the network. Let me tell you something about the network. I use the word network synonymously with the area where the sensor nodes are deployed. From a strictly programming perspective, what is a sensor node? Here we omit the "sensor" part; all we care about are that each node is mobile and has a radio capable of transmitting at a fixed power-level (for now) and receiving when within range of another node. 
@@ -28,7 +32,8 @@
 
 //void view_x4(SIM_DIM_X,SIM_DIM_Y)
 void view_x4(Mat *,int,int);
-void view_draw_nodes(Mat *, Point *, int);
+void view_drawNodes(Mat *, Point *, int);
+void view_drawRadioComm(Mat *, Point *, int);
 
 
 #endif
