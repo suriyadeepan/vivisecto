@@ -27,6 +27,11 @@ void view_drawRadioComm(Mat *view, Node* model_node[], int node_count){
 			line(*view, Point(model_node[i]->x * 4,model_node[i]->y * 4),
 				 	Point(model_node[model_node[i]->sender]->x*4,model_node[model_node[i]->sender]->y*4),Scalar(0,255,0), 2,8,0);
 		}// if ends here
+
+		// Transmitting node
+		else if(model_node[i]->ev_type == 1)
+			circle( *view, Point( (model_node[i]->x) * 4, (model_node[i]->y) * 4), 21, Scalar(255,191,0), -1,8,0);
+
 	}// end of FOR
 
 }
