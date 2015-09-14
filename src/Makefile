@@ -1,6 +1,7 @@
 all: 
 	cd simulator; make
-	g++ simulator/*.o init.cc `pkg-config opencv --libs` -o init
+	cd map; make
+	g++ simulator/*.o map/*.o init.cc `pkg-config opencv --libs` -o init
 
 run:
 	./init

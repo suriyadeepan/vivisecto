@@ -4,7 +4,6 @@ void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, 
 
 void view_drawNodes(Mat *view, Node* model_node[], int node_count){ 
 
-
 	for(int i=0;i<node_count;i++){
 
 		circle( *view, Point( model_node[i]->x * 4, model_node[i]->y * 4), 15, Scalar(0,255,255), -1,8,0);
@@ -17,8 +16,6 @@ void view_drawNodes(Mat *view, Node* model_node[], int node_count){
 }
 
 void view_drawRadioComm(Mat *view, Node* model_node[], int node_count){
-
-	view->setTo(cv::Scalar(0,0,0));
 
 	for(int i=0;i<node_count;i++){
 

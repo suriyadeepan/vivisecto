@@ -4,6 +4,7 @@
 #include "simulator/model.h"
 #include "simulator/view.h"
 #include "simulator/controller.h"
+#include "map/map.h"
 
 #define SIM_DIX 200
 #define SIM_DIY 200
@@ -11,6 +12,7 @@
 using namespace cv;
 
 Node** nodes = NULL;
+Mat view_map;
 Mat view;
 
 // Frame switch delay
@@ -100,9 +102,8 @@ int main(int argc, char** argv){
 		nodes[i] = NULL;
 
 	// init view
-	view_x4(&view,SIM_DIX,SIM_DIY);
-
-
+	view_x4(&view_map,SIM_DIX,SIM_DIY);
+	map_drawGrid(&view_map);
   
   char line [60]; 
   double sim_t, sim_prev=-1;
@@ -127,7 +128,9 @@ int main(int argc, char** argv){
 
     if (sim_t > sim_prev) {
 
+
 			// redraw View
+			view_map.copyTo(view);
 			view_drawRadioComm(&view,nodes,node_count);
 			view_drawNodes(&view,nodes,node_count);
 			blur( view, view, Size( 2, 2 ) );
