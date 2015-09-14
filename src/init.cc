@@ -26,10 +26,6 @@ int add_to_array(Node* array[], int len, char* string){
   if (id >= len)
     return -1;
 
-	//printf("\nParams: %lf %d %d %d %d %d", time, id, x, y, t, s);
-
-//	printf("\n%x",array[id]);
-
   if (array[id] == NULL) {
     array[id] = Node_new(id, x ,y, t, s);
     if (array[id] == NULL)
@@ -57,6 +53,11 @@ int add_to_array(Node* array[], int len, char* string){
   return id;
 }
 
+
+void on_trackbar( int, void* ){
+
+}
+
 int main(int argc, char** argv){
 
   static const char filename[] = "events.mono";
@@ -73,7 +74,8 @@ int main(int argc, char** argv){
 
 	// init view
 	view_x4(&view,SIM_DIX,SIM_DIY);
-	
+
+
   
   char line [60]; 
   double sim_t, sim_prev=-1;
@@ -85,6 +87,11 @@ int main(int argc, char** argv){
 
 	char user_ip = ' ';
 	int delay = 1;
+
+	namedWindow("View Mode", 1);
+	// setup track bar to seek sim_t
+	createTrackbar( "sim_t ", "View Mode", (int *)&sim_t,  100, on_trackbar );
+
 
   do {
 
@@ -117,6 +124,7 @@ int main(int argc, char** argv){
     add_to_array(nodes, node_count, line);
     line_no++;
 
+	
   } while (fgets (line, sizeof line, fp) != NULL && user_ip != 'q');
 
 
