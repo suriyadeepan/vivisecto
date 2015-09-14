@@ -87,16 +87,18 @@ int main(int argc, char** argv){
 	int delay = 1;
 
   do {
-    sscanf(line, "%lf", &sim_t);
 
+    sscanf(line, "%lf", &sim_t);
 
     if (sim_t > sim_prev) {
 
 			// redraw View
 			view_drawRadioComm(&view,nodes,node_count);
-			view_drawNodes(&view,nodes,node_count,sim_t);
-			// Smooth
-			blur( view, view, Size( 4, 4 ) );
+			view_drawNodes(&view,nodes,node_count);
+			blur( view, view, Size( 2, 2 ) );
+
+			view_drawStats(&view,nodes,node_count,sim_t);
+			blur( view, view, Size( 3, 3 ) );
 
 			// delay
 			waitKey(delay);

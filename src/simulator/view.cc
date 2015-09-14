@@ -1,14 +1,10 @@
 #include "view.h"
 
-void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, SIM_DIM_Y*4, CV_8UC4); }
+void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, 300 + SIM_DIM_Y*4, CV_8UC4); }
 
-void view_drawNodes(Mat *view, Node* model_node[], int node_count,double sim_t){ 
+void view_drawNodes(Mat *view, Node* model_node[], int node_count){ 
 
-	// draw simulation time on top right corner of screen
-	char sim_t_str[15];
-	sprintf(sim_t_str,"%lf",sim_t);	
-	putText( *view,sim_t_str, Point(view->cols - 120,30), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(255,255,255), 2,8,false );
-	
+
 	for(int i=0;i<node_count;i++){
 
 		circle( *view, Point( model_node[i]->x * 4, model_node[i]->y * 4), 15, Scalar(0,255,255), -1,8,0);
@@ -39,3 +35,29 @@ void view_drawRadioComm(Mat *view, Node* model_node[], int node_count){
 	}// end of FOR
 
 }
+
+void view_drawStats(Mat *view, Node* model_node[], int node_count, double sim_t){
+
+	// draw simulation time on top right corner of screen
+	char sim_t_str[15];
+	sprintf(sim_t_str,"%lf",sim_t);	
+	putText( *view,sim_t_str, Point(view->cols - 120,30), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(255,255,255), 2,8,false );
+	
+	int total_pkts_tx = 0;
+	int total_pkts_rx = 0;
+
+	for(int i=0;i<node_count;i++){
+		total_pkts_tx += model_node[i]->pkts_tx;
+		total_pkts_rx += model_node[i]->pkts_rx;
+	}
+
+	char stat_str[30] = "STAT";
+	putText( *view,stat_str, Point(view->cols - 250,110), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	sprintf(stat_str,"TX : %d packets",total_pkts_tx);
+	putText( *view,stat_str, Point(view->cols - 250,130), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	sprintf(stat_str,"RX : %d packets",total_pkts_rx);
+	putText( *view,stat_str, Point(view->cols - 250,150), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+
+}
+
+
