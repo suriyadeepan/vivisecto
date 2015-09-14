@@ -98,6 +98,7 @@ int main(int argc, char** argv){
 			blur( view, view, Size( 2, 2 ) );
 
 			view_drawStats(&view,nodes,node_count,sim_t);
+			view_drawModel(&view,nodes,node_count);
 			blur( view, view, Size( 3, 3 ) );
 
 			// delay

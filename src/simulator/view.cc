@@ -53,10 +53,27 @@ void view_drawStats(Mat *view, Node* model_node[], int node_count, double sim_t)
 
 	char stat_str[30] = "STAT";
 	putText( *view,stat_str, Point(view->cols - 250,110), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
-	sprintf(stat_str,"TX : %d packets",total_pkts_tx);
-	putText( *view,stat_str, Point(view->cols - 250,130), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
-	sprintf(stat_str,"RX : %d packets",total_pkts_rx);
-	putText( *view,stat_str, Point(view->cols - 250,150), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	sprintf(stat_str,"TX : %5d packets",total_pkts_tx);
+	putText( *view,stat_str, Point(view->cols - 250,140), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	sprintf(stat_str,"RX : %5d packets",total_pkts_rx);
+	putText( *view,stat_str, Point(view->cols - 250,160), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+
+}
+
+void view_drawModel(Mat *view, Node* model_node[], int node_count){
+
+	char node_i_str[50] = "MODEL";
+	putText( *view,node_i_str, Point(view->cols - 250,200), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+
+	strcpy(node_i_str,"id      x   y  pkt_tx pkt_rx");
+	putText( *view,node_i_str, Point(view->cols - 250,230), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+
+	
+	for(int i=0;i<node_count;i++){
+		sprintf(node_i_str,"N%03d %3d %3d %4d %4d",i,model_node[i]->x,model_node[i]->y,model_node[i]->pkts_tx,model_node[i]->pkts_rx);
+		putText( *view,node_i_str, Point(view->cols - 250,240 + ((i+1) * 20) ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	}
+
 
 }
 
