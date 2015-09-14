@@ -8,6 +8,8 @@ run:
 
 clean:
 	rm init
+	cd simulator; rm *.o
+	cd map; rm *.o
 
 #all:
 #	cd dissect; make
