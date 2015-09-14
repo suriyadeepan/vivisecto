@@ -34,7 +34,7 @@ using namespace cv;
 
 //void view_x4(SIM_DIM_X,SIM_DIM_Y)
 void view_x4(Mat *,int,int);
-void view_drawNodes(Mat *, Node**, int);
+void view_drawNodes(Mat *, Node**, int, double);
 void view_drawRadioComm(Mat *, Node**, int);
 
 

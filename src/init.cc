@@ -3,6 +3,7 @@
 
 #include "simulator/model.h"
 #include "simulator/view.h"
+#include "simulator/controller.h"
 
 #define SIM_DIX 200
 #define SIM_DIY 200
@@ -88,46 +89,25 @@ int main(int argc, char** argv){
   do {
     sscanf(line, "%lf", &sim_t);
 
+
     if (sim_t > sim_prev) {
+
+			// redraw View
 			view_drawRadioComm(&view,nodes,node_count);
-			view_drawNodes(&view,nodes,node_count);
+			view_drawNodes(&view,nodes,node_count,sim_t);
 			// Smooth
 			blur( view, view, Size( 4, 4 ) );
 
-			imshow("View Mode",view);
+			// delay
 			waitKey(delay);
 
+			// get user input
 			user_ip = (char)waitKey(delay);
 
-			switch(user_ip){
-
-				case '+':
-					if(delay > 10)
-						delay -= 10;	
-					else
-						delay = 1;
-					break;
-
-				case '-':
-					if(delay < 200)
-						delay += 50;
-					else
-						delay = 200;
-					break;
-
-				case 'p':
-					if(delay != -1)
-						delay = -1;
-					else
-						delay = 80;
-					break;
-
-				case 'n':
-					delay = -1;
-
-			}
-
-
+			cntl_input(user_ip,&delay);
+			
+			// update display
+			imshow("View Mode",view);
 		}
 
     sim_prev = sim_t;

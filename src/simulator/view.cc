@@ -2,15 +2,19 @@
 
 void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, SIM_DIM_Y*4, CV_8UC4); }
 
-void view_drawNodes(Mat *view, Node* model_node[], int node_count){ 
+void view_drawNodes(Mat *view, Node* model_node[], int node_count,double sim_t){ 
 
+	// draw simulation time on top right corner of screen
+	char sim_t_str[15];
+	sprintf(sim_t_str,"%lf",sim_t);	
+	putText( *view,sim_t_str, Point(view->cols - 120,30), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(255,255,255), 2,8,false );
+	
 	for(int i=0;i<node_count;i++){
 
 		circle( *view, Point( model_node[i]->x * 4, model_node[i]->y * 4), 15, Scalar(0,255,255), -1,8,0);
 		char node_id_str[3];
 		sprintf(node_id_str,"%d",i);
 		putText( *view,node_id_str, Point(-6 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
-
 
 	}
 
@@ -35,70 +39,3 @@ void view_drawRadioComm(Mat *view, Node* model_node[], int node_count){
 	}// end of FOR
 
 }
-
-/*int main(){
-
-	srand(time(NULL));
-
-	//node locations
-	Point node_loc[10];
-	node_loc[0] = Point(26,73);
-	node_loc[1] = Point(34,75);
-	node_loc[2] = Point(89,20);
-	node_loc[3] = Point(55,55);
-	node_loc[4] = Point(10,90);
-	node_loc[5] = Point(90,15);
-	node_loc[6] = Point(50,20);
-	node_loc[7] = Point(75,10);
-	node_loc[8] = Point(30,30);
-	node_loc[9] = Point(30,10);
-
-	Mat view;
-
-	view_x4(&view,200,200);
-
-	int seed = 1;
-	int delay = 80;
-	char user_ip = ' ';
-
-	do{
-		view_drawRadioComm(&view,node_loc,rand()%10,rand()%10);
-		view_drawNodes(&view,node_loc,seed);
-    blur( view, view, Size( 5, 5 ) );
-		imshow("GUI",view);
-
-		user_ip = (char)waitKey(delay);
-
-		switch(user_ip){
-
-			case '+':
-				if(delay > 20)
-					delay -= 50;	
-				else
-					delay = 20;
-				break;
-
-			case '-':
-				if(delay < 200)
-					delay += 50;
-				else
-					delay = 200;
-				break;
-
-			case 'p':
-				if(delay != -1)
-					delay = -1;
-				else
-					delay = 80;
-				break;
-
-			case 'n':
-				delay = -1;
-
-		}
-		
-	}while(user_ip != 'q');
-
-	return 0;
-
-}*/
