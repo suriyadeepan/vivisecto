@@ -13,6 +13,9 @@ using namespace cv;
 Node** nodes = NULL;
 Mat view;
 
+// Frame switch delay
+int delay = 1;
+
 /*
   the line read from the file is passed and node is created if not already existing 
   or updated otherwise with the currently read parameters
@@ -54,7 +57,31 @@ int add_to_array(Node* array[], int len, char* string){
 }
 
 
-void on_trackbar( int, void* ){
+void cntl_simTimeSeek( int val, void* ){
+
+	printf("\nSim_time (trackbar) : %d\n",val);
+}
+
+void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
+	
+	if ( event == EVENT_LBUTTONDOWN ){
+		if(delay != -1){
+			printf("\n>> PAUSED");
+			printf("\n>> Press any key to continue");
+			delay = -1;
+		}
+		else{
+			printf("\n>> PLAY : Press any key to continue");
+			delay = 1;
+		}
+	}
+
+	if ( event == EVENT_RBUTTONDOWN ){
+		destroyWindow("View Mode");
+		exit(-1);
+	}
+
+
 
 }
 
@@ -86,11 +113,12 @@ int main(int argc, char** argv){
   int line_no = 1;
 
 	char user_ip = ' ';
-	int delay = 1;
 
 	namedWindow("View Mode", 1);
 	// setup track bar to seek sim_t
-	createTrackbar( "sim_t ", "View Mode", (int *)&sim_t,  100, on_trackbar );
+	createTrackbar( "sim_t ", "View Mode", NULL,  100, cntl_simTimeSeek );
+	//set the callback function for any mouse event
+	setMouseCallback("View Mode", cntl_mouseClicked, NULL);
 
 
   do {
@@ -108,13 +136,10 @@ int main(int argc, char** argv){
 			view_drawModel(&view,nodes,node_count);
 			blur( view, view, Size( 3, 3 ) );
 
-			// delay
-			waitKey(delay);
-
 			// get user input
 			user_ip = (char)waitKey(delay);
 
-			cntl_input(user_ip,&delay);
+			//cntl_input(user_ip,&delay);
 			
 			// update display
 			imshow("View Mode",view);
