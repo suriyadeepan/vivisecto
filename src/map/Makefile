@@ -1,5 +1,5 @@
 map: *.cc
-	g++  -c *.cc `pkg-config opencv --libs` 
+	g++ -Wall -pg -c *.cc `pkg-config opencv --libs` 
 
 clean:
 	rm *.o

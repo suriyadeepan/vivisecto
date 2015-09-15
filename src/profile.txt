@@ -1,0 +1,349 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+100.07      0.02     0.02     2040     9.81     9.81  view_drawRadioComm(cv::Mat*, _Node**, int)
+  0.00      0.02     0.00   100566     0.00     0.00  cv::Point_<int>::Point_(int, int)
+  0.00      0.02     0.00    92134     0.00     0.00  cv::Vec<double, 4>::Vec()
+  0.00      0.02     0.00    92134     0.00     0.00  cv::Matx<double, 4, 1>::Matx()
+  0.00      0.02     0.00    92134     0.00     0.00  cv::Scalar_<double>::Scalar_(double, double, double, double)
+  0.00      0.02     0.00     4081     0.00     0.00  cv::Size_<int>::Size_(int, int)
+  0.00      0.02     0.00     2898     0.00     0.00  add_to_array(_Node**, int, char*)
+  0.00      0.02     0.00     2040     0.00     0.00  view_drawModel(cv::Mat*, _Node**, int)
+  0.00      0.02     0.00     2040     0.00     0.00  view_drawNodes(cv::Mat*, _Node**, int)
+  0.00      0.02     0.00     2040     0.00     0.00  view_drawStats(cv::Mat*, _Node**, int, double)
+  0.00      0.02     0.00       10     0.00     0.00  Node_new(int, int, int, int, int)
+  0.00      0.02     0.00        5     0.00     0.00  cv::Mat::release()
+  0.00      0.02     0.00        4     0.00     0.00  cv::Mat::MSize::MSize(int*)
+  0.00      0.02     0.00        4     0.00     0.00  cv::Mat::MStep::MStep()
+  0.00      0.02     0.00        4     0.00     0.00  cv::Mat::initEmpty()
+  0.00      0.02     0.00        3     0.00     0.00  cv::Mat::Mat()
+  0.00      0.02     0.00        2     0.00     0.00  cv::Mat::MStep::operator[](int)
+  0.00      0.02     0.00        2     0.00     0.00  cv::Mat::~Mat()
+  0.00      0.02     0.00        2     0.00     0.00  cv::Mat::MStep::operator[](int) const
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z12map_drawGridPN2cv3MatE
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z7view_x4PN2cv3MatEii
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8Node_newiiiii
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I_nodes
+  0.00      0.02     0.00        1     0.00     0.00  model_init(_IO_FILE*)
+  0.00      0.02     0.00        1     0.00     0.00  map_drawGrid(cv::Mat*)
+  0.00      0.02     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.02     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.02     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.02     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.02     0.00        1     0.00     0.00  view_x4(cv::Mat*, int, int)
+  0.00      0.02     0.00        1     0.00     0.00  cv::_InputArray::_InputArray(cv::Scalar_<double> const&)
+  0.00      0.02     0.00        1     0.00     0.00  cv::Mat::create(int, int, int)
+  0.00      0.02     0.00        1     0.00     0.00  cv::Mat::Mat(int, int, int)
+  0.00      0.02     0.00        1     0.00     0.00  cv::Mat::operator=(cv::Mat const&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 49.96% of 0.02 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.02                 main [1]
+                0.02    0.00    2040/2040        view_drawRadioComm(cv::Mat*, _Node**, int) [2]
+                0.00    0.00    4080/100566      cv::Point_<int>::Point_(int, int) [9]
+                0.00    0.00    4080/4081        cv::Size_<int>::Size_(int, int) [13]
+                0.00    0.00    2898/2898        add_to_array(_Node**, int, char*) [14]
+                0.00    0.00    2040/2040        view_drawNodes(cv::Mat*, _Node**, int) [16]
+                0.00    0.00    2040/2040        view_drawStats(cv::Mat*, _Node**, int, double) [17]
+                0.00    0.00    2040/2040        view_drawModel(cv::Mat*, _Node**, int) [15]
+                0.00    0.00       1/3           cv::Mat::Mat() [23]
+                0.00    0.00       1/1           model_init(_IO_FILE*) [31]
+                0.00    0.00       1/1           map_drawGrid(cv::Mat*) [32]
+                0.00    0.00       1/1           view_x4(cv::Mat*, int, int) [37]
+                0.00    0.00       1/2           cv::Mat::~Mat() [25]
+-----------------------------------------------
+                0.02    0.00    2040/2040        main [1]
+[2]    100.0    0.02    0.00    2040         view_drawRadioComm(cv::Mat*, _Node**, int) [2]
+                0.00    0.00   23004/100566      cv::Point_<int>::Point_(int, int) [9]
+                0.00    0.00   18672/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+-----------------------------------------------
+                0.00    0.00      42/100566      map_drawGrid(cv::Mat*) [32]
+                0.00    0.00    4080/100566      main [1]
+                0.00    0.00    8160/100566      view_drawStats(cv::Mat*, _Node**, int, double) [17]
+                0.00    0.00   23004/100566      view_drawRadioComm(cv::Mat*, _Node**, int) [2]
+                0.00    0.00   24480/100566      view_drawModel(cv::Mat*, _Node**, int) [15]
+                0.00    0.00   40800/100566      view_drawNodes(cv::Mat*, _Node**, int) [16]
+[9]      0.0    0.00    0.00  100566         cv::Point_<int>::Point_(int, int) [9]
+-----------------------------------------------
+                0.00    0.00   92134/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+[10]     0.0    0.00    0.00   92134         cv::Vec<double, 4>::Vec() [10]
+                0.00    0.00   92134/92134       cv::Matx<double, 4, 1>::Matx() [11]
+-----------------------------------------------
+                0.00    0.00   92134/92134       cv::Vec<double, 4>::Vec() [10]
+[11]     0.0    0.00    0.00   92134         cv::Matx<double, 4, 1>::Matx() [11]
+-----------------------------------------------
+                0.00    0.00      22/92134       map_drawGrid(cv::Mat*) [32]
+                0.00    0.00    8160/92134       view_drawStats(cv::Mat*, _Node**, int, double) [17]
+                0.00    0.00   18672/92134       view_drawRadioComm(cv::Mat*, _Node**, int) [2]
+                0.00    0.00   24480/92134       view_drawModel(cv::Mat*, _Node**, int) [15]
+                0.00    0.00   40800/92134       view_drawNodes(cv::Mat*, _Node**, int) [16]
+[12]     0.0    0.00    0.00   92134         cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+                0.00    0.00   92134/92134       cv::Vec<double, 4>::Vec() [10]
+-----------------------------------------------
+                0.00    0.00       1/4081        cv::_InputArray::_InputArray(cv::Scalar_<double> const&) [38]
+                0.00    0.00    4080/4081        main [1]
+[13]     0.0    0.00    0.00    4081         cv::Size_<int>::Size_(int, int) [13]
+-----------------------------------------------
+                0.00    0.00    2898/2898        main [1]
+[14]     0.0    0.00    0.00    2898         add_to_array(_Node**, int, char*) [14]
+                0.00    0.00      10/10          Node_new(int, int, int, int, int) [18]
+-----------------------------------------------
+                0.00    0.00    2040/2040        main [1]
+[15]     0.0    0.00    0.00    2040         view_drawModel(cv::Mat*, _Node**, int) [15]
+                0.00    0.00   24480/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+                0.00    0.00   24480/100566      cv::Point_<int>::Point_(int, int) [9]
+-----------------------------------------------
+                0.00    0.00    2040/2040        main [1]
+[16]     0.0    0.00    0.00    2040         view_drawNodes(cv::Mat*, _Node**, int) [16]
+                0.00    0.00   40800/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+                0.00    0.00   40800/100566      cv::Point_<int>::Point_(int, int) [9]
+-----------------------------------------------
+                0.00    0.00    2040/2040        main [1]
+[17]     0.0    0.00    0.00    2040         view_drawStats(cv::Mat*, _Node**, int, double) [17]
+                0.00    0.00    8160/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+                0.00    0.00    8160/100566      cv::Point_<int>::Point_(int, int) [9]
+-----------------------------------------------
+                0.00    0.00      10/10          add_to_array(_Node**, int, char*) [14]
+[18]     0.0    0.00    0.00      10         Node_new(int, int, int, int, int) [18]
+-----------------------------------------------
+                0.00    0.00       1/5           cv::Mat::operator=(cv::Mat const&) [41]
+                0.00    0.00       4/5           cv::Mat::~Mat() [25]
+[19]     0.0    0.00    0.00       5         cv::Mat::release() [19]
+-----------------------------------------------
+                0.00    0.00       1/4           cv::Mat::Mat(int, int, int) [40]
+                0.00    0.00       3/4           cv::Mat::Mat() [23]
+[20]     0.0    0.00    0.00       4         cv::Mat::MSize::MSize(int*) [20]
+-----------------------------------------------
+                0.00    0.00       1/4           cv::Mat::Mat(int, int, int) [40]
+                0.00    0.00       3/4           cv::Mat::Mat() [23]
+[21]     0.0    0.00    0.00       4         cv::Mat::MStep::MStep() [21]
+-----------------------------------------------
+                0.00    0.00       1/4           cv::Mat::Mat(int, int, int) [40]
+                0.00    0.00       3/4           cv::Mat::Mat() [23]
+[22]     0.0    0.00    0.00       4         cv::Mat::initEmpty() [22]
+-----------------------------------------------
+                0.00    0.00       1/3           main [1]
+                0.00    0.00       2/3           __static_initialization_and_destruction_0(int, int) [36]
+[23]     0.0    0.00    0.00       3         cv::Mat::Mat() [23]
+                0.00    0.00       3/4           cv::Mat::MSize::MSize(int*) [20]
+                0.00    0.00       3/4           cv::Mat::initEmpty() [22]
+                0.00    0.00       3/4           cv::Mat::MStep::MStep() [21]
+-----------------------------------------------
+                0.00    0.00       2/2           cv::Mat::operator=(cv::Mat const&) [41]
+[24]     0.0    0.00    0.00       2         cv::Mat::MStep::operator[](int) [24]
+-----------------------------------------------
+                0.00    0.00       1/2           view_x4(cv::Mat*, int, int) [37]
+                0.00    0.00       1/2           main [1]
+[25]     0.0    0.00    0.00       2         cv::Mat::~Mat() [25]
+                0.00    0.00       4/5           cv::Mat::release() [19]
+-----------------------------------------------
+                0.00    0.00       2/2           cv::Mat::operator=(cv::Mat const&) [41]
+[26]     0.0    0.00    0.00       2         cv::Mat::MStep::operator[](int) const [26]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [54]
+[27]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z12map_drawGridPN2cv3MatE [27]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [35]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [54]
+[28]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z7view_x4PN2cv3MatEii [28]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [34]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [54]
+[29]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8Node_newiiiii [29]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [33]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [54]
+[30]     0.0    0.00    0.00       1         _GLOBAL__sub_I_nodes [30]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [36]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[31]     0.0    0.00    0.00       1         model_init(_IO_FILE*) [31]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[32]     0.0    0.00    0.00       1         map_drawGrid(cv::Mat*) [32]
+                0.00    0.00      42/100566      cv::Point_<int>::Point_(int, int) [9]
+                0.00    0.00      22/92134       cv::Scalar_<double>::Scalar_(double, double, double, double) [12]
+                0.00    0.00       1/1           cv::_InputArray::_InputArray(cv::Scalar_<double> const&) [38]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z8Node_newiiiii [29]
+[33]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [33]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z7view_x4PN2cv3MatEii [28]
+[34]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [34]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z12map_drawGridPN2cv3MatE [27]
+[35]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [35]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_nodes [30]
+[36]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [36]
+                0.00    0.00       2/3           cv::Mat::Mat() [23]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[37]     0.0    0.00    0.00       1         view_x4(cv::Mat*, int, int) [37]
+                0.00    0.00       1/1           cv::Mat::Mat(int, int, int) [40]
+                0.00    0.00       1/1           cv::Mat::operator=(cv::Mat const&) [41]
+                0.00    0.00       1/2           cv::Mat::~Mat() [25]
+-----------------------------------------------
+                0.00    0.00       1/1           map_drawGrid(cv::Mat*) [32]
+[38]     0.0    0.00    0.00       1         cv::_InputArray::_InputArray(cv::Scalar_<double> const&) [38]
+                0.00    0.00       1/4081        cv::Size_<int>::Size_(int, int) [13]
+-----------------------------------------------
+                0.00    0.00       1/1           cv::Mat::Mat(int, int, int) [40]
+[39]     0.0    0.00    0.00       1         cv::Mat::create(int, int, int) [39]
+-----------------------------------------------
+                0.00    0.00       1/1           view_x4(cv::Mat*, int, int) [37]
+[40]     0.0    0.00    0.00       1         cv::Mat::Mat(int, int, int) [40]
+                0.00    0.00       1/4           cv::Mat::MSize::MSize(int*) [20]
+                0.00    0.00       1/4           cv::Mat::MStep::MStep() [21]
+                0.00    0.00       1/4           cv::Mat::initEmpty() [22]
+                0.00    0.00       1/1           cv::Mat::create(int, int, int) [39]
+-----------------------------------------------
+                0.00    0.00       1/1           view_x4(cv::Mat*, int, int) [37]
+[41]     0.0    0.00    0.00       1         cv::Mat::operator=(cv::Mat const&) [41]
+                0.00    0.00       2/2           cv::Mat::MStep::operator[](int) [24]
+                0.00    0.00       2/2           cv::Mat::MStep::operator[](int) const [26]
+                0.00    0.00       1/5           cv::Mat::release() [19]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [27] _GLOBAL__sub_I__Z12map_drawGridPN2cv3MatE [34] __static_initialization_and_destruction_0(int, int) [40] cv::Mat::Mat(int, int, int)
+  [28] _GLOBAL__sub_I__Z7view_x4PN2cv3MatEii [35] __static_initialization_and_destruction_0(int, int) [23] cv::Mat::Mat()
+  [29] _GLOBAL__sub_I__Z8Node_newiiiii [36] __static_initialization_and_destruction_0(int, int) [25] cv::Mat::~Mat()
+  [30] _GLOBAL__sub_I_nodes   [37] view_x4(cv::Mat*, int, int) [41] cv::Mat::operator=(cv::Mat const&)
+  [31] model_init(_IO_FILE*)  [18] Node_new(int, int, int, int, int) [10] cv::Vec<double, 4>::Vec()
+  [14] add_to_array(_Node**, int, char*) [38] cv::_InputArray::_InputArray(cv::Scalar_<double> const&) [11] cv::Matx<double, 4, 1>::Matx()
+  [32] map_drawGrid(cv::Mat*) [20] cv::Mat::MSize::MSize(int*) [13] cv::Size_<int>::Size_(int, int)
+  [15] view_drawModel(cv::Mat*, _Node**, int) [21] cv::Mat::MStep::MStep() [9] cv::Point_<int>::Point_(int, int)
+  [16] view_drawNodes(cv::Mat*, _Node**, int) [24] cv::Mat::MStep::operator[](int) [12] cv::Scalar_<double>::Scalar_(double, double, double, double)
+  [17] view_drawStats(cv::Mat*, _Node**, int, double) [39] cv::Mat::create(int, int, int) [26] cv::Mat::MStep::operator[](int) const
+   [2] view_drawRadioComm(cv::Mat*, _Node**, int) [19] cv::Mat::release()
+  [33] __static_initialization_and_destruction_0(int, int) [22] cv::Mat::initEmpty()
