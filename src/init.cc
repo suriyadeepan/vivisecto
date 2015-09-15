@@ -22,6 +22,11 @@ int delay = 1;
 // total number of steps of sim_t in trackbar
 int SIM_STEPS;
 int sim_seek_step = 0;
+FILE *ifp;
+FILE *fp;
+
+bool ON_FILE_READ = false;
+bool ON_SEEK = false;
 
 /*
   the line read from the file is passed and node is created if not already existing 
@@ -66,7 +71,13 @@ int add_to_array(Node* array[], int len, char* string){
 
 void cntl_simTimeSeek( int val, void* ){
 
-	printf("\nSim_time (trackbar) : %d\n",val);
+		ON_SEEK = true;
+		sim_seek_step = val;
+		printf("\nSIM_T : %d",val);
+		while(ON_FILE_READ);
+		model_seek(fp,ifp,val);
+		ON_SEEK = false;
+
 }
 
 void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
@@ -96,11 +107,14 @@ int main(int argc, char** argv){
 
   char  filename[] = "events.mono";
   char ifilename[] = "events.index";
-  FILE *fp = fopen ( filename, "r" );
+  fp = fopen ( filename, "r" );
 
 	// index events.mono 
 	SIM_STEPS = index_index(filename);
 	printf("\nSIM_STEPS : %d",SIM_STEPS);
+
+	// open index file in RO mode
+	ifp = fopen(ifilename,"r");
 
   int node_count = model_init(fp);
   nodes = (Node**)malloc(sizeof(*nodes) * node_count);
@@ -130,14 +144,16 @@ int main(int argc, char** argv){
 
 
   do {
-
-
+		
+		ON_FILE_READ = false;
     sscanf(line, "%lf", &sim_t);
  
     if (sim_t > sim_prev) {
 
-			sim_seek_step = (int)sim_t;
-			setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
+			if(!ON_SEEK){
+				sim_seek_step = (int)sim_t;
+				setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
+			}
 
 			// redraw View
 			view_map.copyTo(view);
@@ -162,7 +178,7 @@ int main(int argc, char** argv){
     add_to_array(nodes, node_count, line);
     line_no++;
 
-	
+		ON_FILE_READ = true;	
   } while (fgets (line, sizeof line, fp) != NULL && user_ip != 'q');
 
 
