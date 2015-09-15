@@ -40,7 +40,7 @@ int model_init(FILE *fp){
     }
       
     node_count++;
-    fgetpos(fp,&fpos);
+    //fgetpos(fp,&fpos);
   }
   
   //printf("\nNum Nodes : %d\n",node_count);
