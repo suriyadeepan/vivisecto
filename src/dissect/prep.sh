@@ -1,11 +1,11 @@
-#sed -i.bak 1d path-to/Mobility.txt && sed -i.bak 's/  */ /g' path-to/Mobility.txt
-#sed -i.bak 1d path-to/RadioCommunication.txt && sed -i.bak 's/  */ /g' path-to/RadioCommunication.txt
-#sed -i.bak 1d path-to/Topology.txt && sed -i.bak 's/  */ /g' path-to/Topology.txt
+#sed -i.bak 1d ./Mobility.txt && sed -i.bak 's/  */ /g' ./Mobility.txt
+#sed -i.bak 1d ./RadioCommunication.txt && sed -i.bak 's/  */ /g' ./RadioCommunication.txt
+#sed -i.bak 1d ./Topology.txt && sed -i.bak 's/  */ /g' ./Topology.txt
 
-mv path-to/Mobility.txt path-to/Mobility.csv
-mv path-to/RadioCommunication.txt path-to/RadioCommunication.csv
-mv path-to/Topology.txt path-to/Topology.csv
+mv ./Mobility.txt ./Mobility.csv
+mv ./RadioCommunication.txt ./RadioCommunication.csv
+mv ./Topology.txt ./Topology.csv
 
-#sed -i.bak 1d path-to/*.csv && sed -i.bak 's/  */ /g' path-to/*.csv
-sed -i.bak 's/  */ /g' path-to/*.csv && sed -i.bak 1d path-to/*.csv 
-rm path-to/*.csv.bak
+#sed -i.bak 1d ./*.csv && sed -i.bak 's/  */ /g' ./*.csv
+sed -i.bak 's/  */ /g' ./*.csv && sed -i.bak 1d ./*.csv 
+rm ./*.csv.bak
