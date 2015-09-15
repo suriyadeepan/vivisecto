@@ -5,6 +5,7 @@
 #include "simulator/view.h"
 #include "simulator/controller.h"
 #include "map/map.h"
+#include "index.h"
 
 #define SIM_DIX 200
 #define SIM_DIY 200
@@ -17,6 +18,10 @@ Mat view;
 
 // Frame switch delay
 int delay = 1;
+
+// total number of steps of sim_t in trackbar
+int SIM_STEPS;
+int sim_seek_step = 0;
 
 /*
   the line read from the file is passed and node is created if not already existing 
@@ -89,11 +94,13 @@ void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
 
 int main(int argc, char** argv){
 
-  static const char filename[] = "events.mono";
+  char  filename[] = "events.mono";
+  char ifilename[] = "events.index";
   FILE *fp = fopen ( filename, "r" );
 
-  // initiate model
-  Mat model;
+	// index events.mono 
+	SIM_STEPS = index_index(filename);
+	printf("\nSIM_STEPS : %d",SIM_STEPS);
 
   int node_count = model_init(fp);
   nodes = (Node**)malloc(sizeof(*nodes) * node_count);
@@ -117,17 +124,20 @@ int main(int argc, char** argv){
 
 	namedWindow("View Mode", 1);
 	// setup track bar to seek sim_t
-	createTrackbar( "sim_t ", "View Mode", NULL,  100, cntl_simTimeSeek );
+	createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );
 	//set the callback function for any mouse event
 	setMouseCallback("View Mode", cntl_mouseClicked, NULL);
 
 
   do {
 
-    sscanf(line, "%lf", &sim_t);
 
+    sscanf(line, "%lf", &sim_t);
+ 
     if (sim_t > sim_prev) {
 
+			sim_seek_step = (int)sim_t;
+			setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
 
 			// redraw View
 			view_map.copyTo(view);
