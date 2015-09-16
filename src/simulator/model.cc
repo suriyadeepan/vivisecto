@@ -40,7 +40,7 @@ int model_init(FILE *fp){
     }
       
     node_count++;
-    fgetpos(fp,&fpos);
+    //fgetpos(fp,&fpos);
   }
   
   //printf("\nNum Nodes : %d\n",node_count);
@@ -69,4 +69,34 @@ void model_update(FILE *fp, Mat *model){
   
 }
 
+void Model_print(Node* nodes[],int node_count){
+
+	for(int i=0;i<node_count;i++)
+		Node_print(nodes[i]);
+
+}
+
+
+void model_seek(FILE *fp, FILE *ifp, int sim_seek_time){
+
+	fpos_t target_fpos;
+	int line_num = 0;
+  char line [60]; 
+	
+	// BUG FIX : set position of *ifp to 0
+	fseek(ifp,0,SEEK_SET);
+
+	while(fgets (line, sizeof line, ifp) != NULL){
+
+		if(line_num == sim_seek_time){
+			sscanf(line,"%d",&target_fpos);
+			break;
+		}
+		line_num++;
+	}
+
+	// now that we know where we should jump, let us jump there
+	fsetpos(fp,&target_fpos);	
+	
+}
 

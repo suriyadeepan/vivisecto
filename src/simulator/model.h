@@ -21,5 +21,7 @@ void model_update(FILE *);
 //
 Node* Node_new(int,int,int,int,int );
 void Node_print(Node *);
+void Model_print(Node**,int);
 
+void model_seek(FILE*,FILE*,int);
 #endif

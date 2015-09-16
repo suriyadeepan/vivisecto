@@ -1,5 +1,5 @@
-all: *.cc
-	gcc -g -Wall -c *.cc 
-	gcc view.o view.cc -o view
+view:  *.cc 
+	g++ -c *.cc `pkg-config opencv --libs` 
 
-
+clean:
+	rm -f *.o 

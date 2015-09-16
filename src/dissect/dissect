@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mv ./Mobility.txt ./Mobility.csv
+mv ./RadioCommunication.txt ./RadioCommunication.csv
+mv ./Topology.txt ./Topology.csv
+
+sed -i.bak 's/  */ /g' ./*.csv && sed -i.bak 1d ./*.csv 
+rm ./*.csv.bak
+
+python makeMono.py

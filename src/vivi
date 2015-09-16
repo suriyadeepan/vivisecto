@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check if $VIVI_SRC is set
+echo
+echo "#0 Checking ViVi configuration"
+
+if [ -z ${VIVI_SRC+x} ]; 
+then 
+	echo "VIVI_SRC is unset"
+	echo "Try running install script of ViVi again.."
+else 
+	echo "> ViVi Src already configured.."; fi
+
+# Copy trace files to ViVi src directory
+echo 
+echo "#1 Copying trace files"
+cp RadioCommunication.txt Mobility.txt Topology.txt $VIVI_SRC/dissect
+
+# Switch to ViVi src directory
+echo
+echo "#2 Change directory"
+cd $VIVI_SRC
+echo $PWD
+
+# Run dissect to create events.mono
+echo
+echo "#3 Run dissect script"
+# clean directories
+rm events.mono
+rm dissect/*.csv
+cd dissect
+./dissect
+cd ..
+
+# Run init
+echo
+echo "#4 Run init script"
+pwd
+make
+./init
+
+# Terminate
+echo
+echo "#5 Program terminated"
+echo "--------------------------"
+echo
