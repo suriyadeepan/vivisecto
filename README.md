@@ -22,7 +22,7 @@ cd /path/to/Castalia/Simulations/ScenarioName/
 # Assuming that simulation is done and trace files
 #  RadioCommunication.txt, Mobility.txt, Topology.txt 
 #     are generated
-./vivi
+vivi
 ```
 
 ##Contribution
