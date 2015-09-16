@@ -1,5 +1,5 @@
 view:  *.cc 
-	g++ -c *.cc `pkg-config opencv --libs` 
+	g++ -fpermissive -c *.cc `pkg-config opencv --libs` 
 
 clean:
 	rm -f *.o 

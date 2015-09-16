@@ -70,18 +70,15 @@ int add_to_array(Node* array[], int len, char* string){
 
 
 void cntl_simTimeSeek( int val, void* ){
-
   ON_SEEK = true;
   sim_seek_step = val;
   printf("\nSIM_T : %d",val);
   while(ON_FILE_READ);
   model_seek(fp,ifp,val);
   ON_SEEK = false;
-
 }
 
 void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
-	
   if ( event == EVENT_LBUTTONDOWN ){
     if(delay != -1){
       printf("\n>> PAUSED");
@@ -98,9 +95,6 @@ void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
     destroyWindow("View Mode");
     exit(-1);
   }
-
-
-
 }
 
 int main(int argc, char** argv){
@@ -137,11 +131,8 @@ int main(int argc, char** argv){
   char user_ip = ' ';
 
   namedWindow("View Mode", 1);
-  // setup track bar to seek sim_t
-  createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );
-  //set the callback function for any mouse event
-  setMouseCallback("View Mode", cntl_mouseClicked, NULL);
-
+  createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );  // setup track bar to seek sim_t
+  setMouseCallback("View Mode", cntl_mouseClicked, NULL);  //set the callback function for any mouse event
 
   do {
 		
@@ -149,7 +140,6 @@ int main(int argc, char** argv){
     sscanf(line, "%lf", &sim_t);
  
     if (sim_t > sim_prev) {
-
       if(!ON_SEEK){
 	sim_seek_step = (int)sim_t;
 	setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
@@ -169,7 +159,6 @@ int main(int argc, char** argv){
       user_ip = (char)waitKey(delay);
 
       //cntl_input(user_ip,&delay);
-			
       // update display
       imshow("View Mode",view);
     }

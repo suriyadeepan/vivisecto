@@ -32,6 +32,14 @@ using namespace cv;
  */
 
 
+typedef struct _thread_data{
+  Mat* pView;
+  Node** nodes;
+  int node_count;
+  double sim;
+}thread_data_t;
+
+
 //void view_x4(SIM_DIM_X,SIM_DIM_Y)
 void view_x4(Mat *,int,int);
 void view_drawNodes(Mat *, Node**, int);
