@@ -32,12 +32,21 @@ using namespace cv;
  */
 
 
+typedef struct _thread_data{
+  Mat* pView;
+  Node** nodes;
+  int node_count;
+  double sim;
+}thread_data_t;
+
+
 //void view_x4(SIM_DIM_X,SIM_DIM_Y)
 void view_x4(Mat *,int,int);
 void view_drawNodes(Mat *, Node**, int);
 void view_drawRadioComm(Mat *, Node**, int);
 void view_drawStats(Mat *, Node**, int,double);
 void view_drawModel(Mat *, Node**, int);
+void threaded_view(Mat *, Node**, int);
 
 
 #endif

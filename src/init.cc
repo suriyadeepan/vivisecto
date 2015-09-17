@@ -47,60 +47,54 @@ int add_to_array(Node* array[], int len, char* string){
       printf("Error allocating memory... exiting...\n"), exit(1);
   } else {
 
-		switch(t) {
+    switch(t) {
 
-			case 0:
-				array[id]->x = x;
-				array[id]->y = y;
-				break;
+    case 0:
+      array[id]->x = x;
+      array[id]->y = y;
+      break;
 
-			case 1:
-				++array[id]->pkts_tx;
-				break;
+    case 1:
+      ++array[id]->pkts_tx;
+      break;
 
-			case 2:
-				++array[id]->pkts_rx;
-		}
-		array[id]->sender = s;
-		array[id]->ev_type = t;
- }
+    case 2:
+      ++array[id]->pkts_rx;
+    }
+    array[id]->sender = s;
+    array[id]->ev_type = t;
+  }
 
   return id;
 }
 
 
 void cntl_simTimeSeek( int val, void* ){
-
-		ON_SEEK = true;
-		sim_seek_step = val;
-		printf("\nSIM_T : %d",val);
-		while(ON_FILE_READ);
-		model_seek(fp,ifp,val);
-		ON_SEEK = false;
-
+  ON_SEEK = true;
+  sim_seek_step = val;
+  printf("\nSIM_T : %d",val);
+  while(ON_FILE_READ);
+  model_seek(fp,ifp,val);
+  ON_SEEK = false;
 }
 
 void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
-	
-	if ( event == EVENT_LBUTTONDOWN ){
-		if(delay != -1){
-			printf("\n>> PAUSED");
-			printf("\n>> Press any key to continue");
-			delay = -1;
-		}
-		else{
-			printf("\n>> PLAY : Press any key to continue");
-			delay = 1;
-		}
-	}
+  if ( event == EVENT_LBUTTONDOWN ){
+    if(delay != -1){
+      printf("\n>> PAUSED");
+      printf("\n>> Press any key to continue");
+      delay = -1;
+    }
+    else{
+      printf("\n>> PLAY : Press any key to continue");
+      delay = 1;
+    }
+  }
 
-	if ( event == EVENT_RBUTTONDOWN ){
-		destroyWindow("View Mode");
-		exit(-1);
-	}
-
-
-
+  if ( event == EVENT_RBUTTONDOWN ){
+    destroyWindow("View Mode");
+    exit(-1);
+  }
 }
 
 int main(int argc, char** argv){
@@ -109,22 +103,22 @@ int main(int argc, char** argv){
   char ifilename[] = "events.index";
   fp = fopen ( filename, "r" );
 
-	// index events.mono 
-	SIM_STEPS = index_index(filename);
-	printf("\nSIM_STEPS : %d",SIM_STEPS);
+  // index events.mono 
+  SIM_STEPS = index_index(filename);
+  printf("\nSIM_STEPS : %d",SIM_STEPS);
 
-	// open index file in RO mode
-	ifp = fopen(ifilename,"r");
+  // open index file in RO mode
+  ifp = fopen(ifilename,"r");
 
   int node_count = model_init(fp);
   nodes = (Node**)malloc(sizeof(*nodes) * node_count);
 
   for (int i = 0; i < node_count; i++)
-		nodes[i] = NULL;
+    nodes[i] = NULL;
 
-	// init view
-	view_x4(&view_map,SIM_DIX,SIM_DIY);
-	map_drawGrid(&view_map);
+  // init view
+  view_x4(&view_map,SIM_DIX,SIM_DIY);
+  map_drawGrid(&view_map);
   
   char line [60]; 
   double sim_t, sim_prev=-1;
@@ -134,51 +128,50 @@ int main(int argc, char** argv){
   sim_prev = sim_t;
   int line_no = 1;
 
-	char user_ip = ' ';
+  char user_ip = ' ';
 
-	namedWindow("View Mode", 1);
-	// setup track bar to seek sim_t
-	createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );
-	//set the callback function for any mouse event
-	setMouseCallback("View Mode", cntl_mouseClicked, NULL);
-
+  namedWindow("View Mode", 1);
+  createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );  // setup track bar to seek sim_t
+  setMouseCallback("View Mode", cntl_mouseClicked, NULL);  //set the callback function for any mouse event
 
   do {
 		
-		ON_FILE_READ = false;
+    ON_FILE_READ = false;
     sscanf(line, "%lf", &sim_t);
  
     if (sim_t > sim_prev) {
+      if(!ON_SEEK){
+	sim_seek_step = (int)sim_t;
+	setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
+      }
 
-			if(!ON_SEEK){
-				sim_seek_step = (int)sim_t;
-				setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
-			}
+      /*
+      // redraw View
+      view_map.copyTo(view);
+      view_drawRadioComm(&view,nodes,node_count);
+      view_drawNodes(&view,nodes,node_count);
+      blur( view, view, Size( 2, 2 ) );
 
-			// redraw View
-			view_map.copyTo(view);
-			view_drawRadioComm(&view,nodes,node_count);
-			view_drawNodes(&view,nodes,node_count);
-			blur( view, view, Size( 2, 2 ) );
+      view_drawStats(&view,nodes,node_count,sim_t);
+      view_drawModel(&view,nodes,node_count);
+      */
+      threaded_view(&view, nodes, node_count);
 
-			view_drawStats(&view,nodes,node_count,sim_t);
-			view_drawModel(&view,nodes,node_count);
-			blur( view, view, Size( 3, 3 ) );
+      blur( view, view, Size( 3, 3 ) );
 
-			// get user input
-			user_ip = (char)waitKey(delay);
+      // get user input
+      user_ip = (char)waitKey(delay);
 
-			//cntl_input(user_ip,&delay);
-			
-			// update display
-			imshow("View Mode",view);
-		}
+      //cntl_input(user_ip,&delay);
+      // update display
+      imshow("View Mode",view);
+    }
 
     sim_prev = sim_t;
     add_to_array(nodes, node_count, line);
     line_no++;
 
-		ON_FILE_READ = true;	
+    ON_FILE_READ = true;	
   } while (fgets (line, sizeof line, fp) != NULL && user_ip != 'q');
 
 
@@ -186,7 +179,7 @@ int main(int argc, char** argv){
   for (i = 0; i < node_count; i++)
     free(nodes[i]);
   
-
+  fclose(fp);
   return 0;
 
 }
