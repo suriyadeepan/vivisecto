@@ -46,7 +46,7 @@ void view_drawNodes(Mat *, Node**, int);
 void view_drawRadioComm(Mat *, Node**, int);
 void view_drawStats(Mat *, Node**, int,double);
 void view_drawModel(Mat *, Node**, int);
-void threaded_view(Mat *, Node**, int);
+void threaded_view(Mat *, Node**, int, int);
 
 
 #endif
