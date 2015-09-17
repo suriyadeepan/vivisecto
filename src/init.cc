@@ -145,6 +145,7 @@ int main(int argc, char** argv){
 	setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
       }
 
+      /*
       // redraw View
       view_map.copyTo(view);
       view_drawRadioComm(&view,nodes,node_count);
@@ -153,6 +154,9 @@ int main(int argc, char** argv){
 
       view_drawStats(&view,nodes,node_count,sim_t);
       view_drawModel(&view,nodes,node_count);
+      */
+      threaded_view(&view, nodes, node_count);
+
       blur( view, view, Size( 3, 3 ) );
 
       // get user input

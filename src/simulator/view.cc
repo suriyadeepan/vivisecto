@@ -79,7 +79,7 @@ void view_draw_nodes(Mat *view, Point *node_loc, int seed){
 }
 
 
-void threaded_draw(Mat *view, Node* model_node[], int node_count){
+void threaded_view(Mat *view, Node* model_node[], int node_count){
 
   enum {RADIO, NODES, STATS, MODEL, MAX_VIEWS };
   pthread_t threads[MAX_VIEWS];
@@ -89,7 +89,7 @@ void threaded_draw(Mat *view, Node* model_node[], int node_count){
 
   pthread_attr_t attr;
   
-  Mat views[MAX_VIEWS];
+  Mat views[MAX_VIEWS](view->rows, views->cols, view->type);;
   thread_data_t data[MAX_VIEWS];
   
   for (int i = 0; i < MAX_VIEWS; i++) {
@@ -110,7 +110,11 @@ void threaded_draw(Mat *view, Node* model_node[], int node_count){
     if (pthread_join(threads[i], NULL) != 0)
       printf("Error joing the thread %d, exiting", i), exit(1);
   
-  
+  *view += views[RADIO];
+  *view += views[NODES];
+  *view += views[STATS];
+  *view += views[MODEL];
+
   
   /*
       view_drawRadioComm(&view,nodes,node_count);
