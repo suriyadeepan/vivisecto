@@ -12,7 +12,9 @@ A light-weight visualizer for [Castalia](https://castalia.forge.nicta.com.au/ind
 cd path/to/vivisecto/
 ./install
 # Enter sudo password for commands that require admin rights
-# Close terminal and open a new session for changes to take effect
+source ~/.bashrc
+# Make sure $VIVI_SRC is set
+echo $VIVI_SRC
 ```
 
 ##Running Vivi
