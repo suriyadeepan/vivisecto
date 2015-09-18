@@ -28,8 +28,6 @@ then
 	echo "VIVI_SRC is unset"
 	echo "#2 Adding to ~/.bashrc"
 	echo "export VIVI_SRC=`pwd`" >> ~/.bashrc
-	export VIVI_SRC=`pwd`
-	source ~/.bashrc
 else 
 	echo "#2 VIVI_SRC is set to '$VIVI_SRC'"; fi
 echo
