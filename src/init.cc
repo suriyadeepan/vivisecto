@@ -73,7 +73,7 @@ void cntl_simTimeSeek( int val, void* ){
 
 		ON_SEEK = true;
 		sim_seek_step = val;
-		printf("\nSIM_T : %d",val);
+		//printf("\nSIM_T : %d",val);
 		while(ON_FILE_READ);
 		model_seek(fp,ifp,val);
 		ON_SEEK = false;
@@ -155,15 +155,23 @@ int main(int argc, char** argv){
 				setTrackbarPos("Simulation Time","View Mode",sim_seek_step);
 			}
 
-			// redraw View
-			view_map.copyTo(view);
-			view_drawRadioComm(&view,nodes,node_count);
-			view_drawNodes(&view,nodes,node_count);
-			blur( view, view, Size( 2, 2 ) );
+			// skip frames
+			if(sim_t - sim_prev > 0.001){
 
-			view_drawStats(&view,nodes,node_count,sim_t);
-			view_drawModel(&view,nodes,node_count);
-			blur( view, view, Size( 3, 3 ) );
+				// redraw View
+				view_map.copyTo(view);
+				view_drawRadioComm(&view,nodes,node_count);
+				view_drawNodes(&view,nodes,node_count);
+				blur( view, view, Size( 2, 2 ) );
+
+				view_drawStats(&view,nodes,node_count,sim_t);
+
+				if(node_count < 20)
+					view_drawModel(&view,nodes,node_count);
+
+				blur( view, view, Size( 3, 3 ) );
+
+			}
 
 			// get user input
 			user_ip = (char)waitKey(delay);

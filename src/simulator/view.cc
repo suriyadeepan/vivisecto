@@ -9,7 +9,11 @@ void view_drawNodes(Mat *view, Node* model_node[], int node_count){
 		circle( *view, Point( model_node[i]->x * 4, model_node[i]->y * 4), 15, Scalar(0,255,255), -1,8,0);
 		char node_id_str[3];
 		sprintf(node_id_str,"%d",i);
-		putText( *view,node_id_str, Point(-6 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
+
+		if(i > 9)
+			putText( *view,node_id_str, Point(-11 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
+		else
+			putText( *view,node_id_str, Point(-6 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
 
 	}
 
