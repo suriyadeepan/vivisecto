@@ -1,9 +1,9 @@
 #include "map.h"
 
-#define SIM_DIM_X  800
-#define SIM_DIM_Y 1100
-
 void map_drawGrid(Mat *map_src){
+
+	int SIM_DIM_X = scale * 200;
+	int SIM_DIM_Y = SIM_DIM_X + 300;
 
 	map_src->setTo(Scalar(0,0,0));
 

@@ -1,23 +1,23 @@
 #include "view.h"
 
-void view_x4(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*4, 300 + SIM_DIM_Y*4, CV_8UC4); }
+void view_xScale(Mat *view, int SIM_DIM_X, int SIM_DIM_Y){ *view = Mat(SIM_DIM_X*scale, 300 + SIM_DIM_Y*scale, CV_8UC4); }
 
 void view_drawNodes(Mat *view, Node* model_node[], int node_count){ 
 
 	for(int i=0;i<node_count;i++){
 
-		circle( *view, Point( model_node[i]->x * 4, model_node[i]->y * 4), 15, Scalar(0,255,255), -1,8,0);
+		circle( *view, Point( model_node[i]->x * scale, model_node[i]->y * scale), 15, Scalar(0,255,255), -1,8,0);
 		char node_id_str[3];
 		sprintf(node_id_str,"%d",i);
 
 		if(i > 9 && i < 100)
-			putText( *view,node_id_str, Point(-11 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
+			putText( *view,node_id_str, Point(-11 + model_node[i]->x * scale, 6 + model_node[i]->y * scale), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
 
 		else if(i > 99)
-			putText( *view,node_id_str, Point(-11 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.4, Scalar(10,10,10), 2,8,false );
+			putText( *view,node_id_str, Point(-11 + model_node[i]->x * scale, 6 + model_node[i]->y * scale), FONT_HERSHEY_SIMPLEX, 0.4, Scalar(10,10,10), 2,8,false );
 
 		else
-			putText( *view,node_id_str, Point(-6 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
+			putText( *view,node_id_str, Point(-6 + model_node[i]->x * scale, 6 + model_node[i]->y * scale), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
 
 	}
 
@@ -28,14 +28,14 @@ void view_drawRadioComm(Mat *view, Node* model_node[], int node_count){
 	for(int i=0;i<node_count;i++){
 
 		if(model_node[i]->ev_type == 2){
-			circle( *view, Point( (model_node[i]->x) * 4, (model_node[i]->y) * 4), 23, Scalar(20,255,20), -1,8,0);
-			line(*view, Point(model_node[i]->x * 4,model_node[i]->y * 4),
-				 	Point(model_node[model_node[i]->sender]->x*4,model_node[model_node[i]->sender]->y*4),Scalar(0,255,0), 2,8,0);
+			circle( *view, Point( (model_node[i]->x) * scale, (model_node[i]->y) * scale), 23, Scalar(20,255,20), -1,8,0);
+			line(*view, Point(model_node[i]->x * scale,model_node[i]->y * scale),
+				 	Point(model_node[model_node[i]->sender]->x*scale,model_node[model_node[i]->sender]->y*scale),Scalar(0,255,0), 2,8,0);
 		}// if ends here
 
 		// Transmitting node
 		else if(model_node[i]->ev_type == 1)
-			circle( *view, Point( (model_node[i]->x) * 4, (model_node[i]->y) * 4), 21, Scalar(255,191,0), -1,8,0);
+			circle( *view, Point( (model_node[i]->x) * scale, (model_node[i]->y) * scale), 21, Scalar(255,191,0), -1,8,0);
 
 	}// end of FOR
 

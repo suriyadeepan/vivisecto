@@ -1,7 +1,7 @@
 all: 
 	cd simulator; make
 	cd map; make
-	g++ simulator/*.o map/*.o *.cc  -lopencv_core -lopencv_imgproc -lopencv_highgui -o init
+	g++ -w simulator/*.o map/*.o *.cc  -lopencv_core -lopencv_imgproc -lopencv_highgui -o init
 
 run:
 	./init

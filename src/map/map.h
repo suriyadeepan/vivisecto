@@ -8,4 +8,6 @@ using namespace cv;
 
 void map_drawGrid(Mat *);
 
+extern int scale;
+
 #endif

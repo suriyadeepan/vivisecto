@@ -19,6 +19,9 @@ Mat view;
 // Frame switch delay
 int delay = 1;
 
+// extern variable scale of display
+int scale = 4;
+
 // total number of steps of sim_t in trackbar
 int SIM_STEPS;
 int sim_seek_step = 0;
@@ -85,11 +88,11 @@ void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
 	if ( event == EVENT_LBUTTONDOWN ){
 		if(delay != -1){
 			printf("\n>> PAUSED");
-			printf("\n>> Press any key to continue");
+			printf("\n>> Press any key to continue\n");
 			delay = -1;
 		}
 		else{
-			printf("\n>> PLAY : Press any key to continue");
+			printf("\n>> PLAY : Press any key to continue\n");
 			delay = 1;
 		}
 	}
@@ -124,10 +127,22 @@ int main(int argc, char** argv){
 
 	// set the event_skip_precision
 	double event_skip_precision = 0.00001 * (int)(node_count/10);
+	printf("\n>> Node Count : %d",node_count);
 	printf("\n>> Precision set to %lf\n",event_skip_precision);
 
 	// init view
-	view_x4(&view_map,SIM_DIX,SIM_DIY);
+	//  before which, setup scale of drawing
+	//   depending on node_count
+	
+	if(node_count < 20)
+		scale = 3;
+	else
+		if(node_count < 50)
+			scale = 4;
+		else
+			scale = 5;
+
+	view_xScale(&view_map,SIM_DIX,SIM_DIY);
 	map_drawGrid(&view_map);
   
   char line [60]; 
@@ -141,6 +156,10 @@ int main(int argc, char** argv){
 	char user_ip = ' ';
 
 	namedWindow("View Mode", 1);
+	moveWindow("View Mode",0,0);
+	setWindowProperty("View Mode",CV_WINDOW_FULLSCREEN,CV_WINDOW_KEEPRATIO);
+
+
 	// setup track bar to seek sim_t
 	createTrackbar( "Simulation Time", "View Mode", &sim_seek_step,  SIM_STEPS, cntl_simTimeSeek );
 	//set the callback function for any mouse event
@@ -172,6 +191,9 @@ int main(int argc, char** argv){
 
 				if(node_count < 20)
 					view_drawModel(&view,nodes,node_count);
+				// TODO
+				//else
+					// draw in batches
 
 				blur( view, view, Size( 3, 3 ) );
 
