@@ -10,8 +10,12 @@ void view_drawNodes(Mat *view, Node* model_node[], int node_count){
 		char node_id_str[3];
 		sprintf(node_id_str,"%d",i);
 
-		if(i > 9)
+		if(i > 9 && i < 100)
 			putText( *view,node_id_str, Point(-11 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
+
+		else if(i > 99)
+			putText( *view,node_id_str, Point(-11 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.4, Scalar(10,10,10), 2,8,false );
+
 		else
 			putText( *view,node_id_str, Point(-6 + model_node[i]->x * 4, 6 + model_node[i]->y * 4), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(10,10,10), 2,8,false );
 
