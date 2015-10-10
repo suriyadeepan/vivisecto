@@ -65,7 +65,7 @@ void view_drawStats(Mat *view, Node* model_node[], int node_count, double sim_t)
 
 }
 
-void view_drawModel(Mat *view, Node* model_node[], int node_count){
+void view_drawModel(Mat *view, Node* model_node[], int node_count,int batch_idx){
 
 	char node_i_str[50] = "MODEL";
 	putText( *view,node_i_str, Point(view->cols - 250,200), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
@@ -74,9 +74,20 @@ void view_drawModel(Mat *view, Node* model_node[], int node_count){
 	putText( *view,node_i_str, Point(view->cols - 250,230), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
 
 	
-	for(int i=0;i<node_count;i++){
-		sprintf(node_i_str,"N%03d %3d %3d %4d %4d",i,model_node[i]->x,model_node[i]->y,model_node[i]->pkts_tx,model_node[i]->pkts_rx);
-		putText( *view,node_i_str, Point(view->cols - 250,240 + ((i+1) * 20) ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+	if(batch_idx == -1){
+		for(int i=0;i<node_count;i++){
+			sprintf(node_i_str,"N%03d %3d %3d %4d %4d",i,model_node[i]->x,model_node[i]->y,model_node[i]->pkts_tx,model_node[i]->pkts_rx);
+			putText( *view,node_i_str, Point(view->cols - 250,240 + ((i+1) * 20) ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+		}
+	}
+	else{
+		int j=0;
+		for(int i=batch_idx; i < batch_idx + 10 && i < node_count;i++){
+			sprintf(node_i_str,"N%03d %3d %3d %4d %4d",i,model_node[i]->x,model_node[i]->y,model_node[i]->pkts_tx,model_node[i]->pkts_rx);
+			putText( *view,node_i_str, Point(view->cols - 250,240 + ((j+1) * 20) ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255,255,255), 2,8,false );
+			j++;
+		}
+	
 	}
 
 

@@ -16,11 +16,17 @@ Node** nodes = NULL;
 Mat view_map;
 Mat view;
 
+// Node Count
+int node_count = 0;
+
 // Frame switch delay
 int delay = 1;
 
 // extern variable scale of display
 int scale = 4;
+
+// batch index : drawing model in batches
+int batch_idx = 0;
 
 // total number of steps of sim_t in trackbar
 int SIM_STEPS;
@@ -86,14 +92,24 @@ void cntl_simTimeSeek( int val, void* ){
 void cntl_mouseClicked(int event, int x, int y, int flags, void* userdata){
 	
 	if ( event == EVENT_LBUTTONDOWN ){
-		if(delay != -1){
-			printf("\n>> PAUSED");
-			printf("\n>> Press any key to continue\n");
-			delay = -1;
+
+		if(x > (200*scale)){
+			batch_idx += 10;
+
+			if(batch_idx >= node_count)
+				batch_idx = 0;
 		}
+
 		else{
-			printf("\n>> PLAY : Press any key to continue\n");
-			delay = 1;
+			if(delay != -1){
+				printf("\n>> PAUSED");
+				printf("\n>> Press any key to continue\n");
+				delay = -1;
+			}
+			else{
+				printf("\n>> PLAY : Press any key to continue\n");
+				delay = 1;
+			}
 		}
 	}
 
@@ -119,7 +135,7 @@ int main(int argc, char** argv){
 	// open index file in RO mode
 	ifp = fopen(ifilename,"r");
 
-  int node_count = model_init(fp);
+  node_count = model_init(fp);
   nodes = (Node**)malloc(sizeof(*nodes) * node_count);
 
   for (int i = 0; i < node_count; i++)
@@ -165,7 +181,6 @@ int main(int argc, char** argv){
 	//set the callback function for any mouse event
 	setMouseCallback("View Mode", cntl_mouseClicked, NULL);
 
-
   do {
 		
 		ON_FILE_READ = false;
@@ -190,10 +205,10 @@ int main(int argc, char** argv){
 				view_drawStats(&view,nodes,node_count,sim_t);
 
 				if(node_count < 20)
-					view_drawModel(&view,nodes,node_count);
-				// TODO
-				//else
-					// draw in batches
+					view_drawModel(&view,nodes,node_count,-1);
+				else
+						view_drawModel(&view,nodes,node_count,batch_idx);
+										
 
 				blur( view, view, Size( 3, 3 ) );
 
