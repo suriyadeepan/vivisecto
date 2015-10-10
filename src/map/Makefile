@@ -1,5 +1,5 @@
 all: *.cc
-	g++  -c *.cc `pkg-config opencv --libs` 
+	g++  -c *.cc 
 
 clean:
 	rm *.o
