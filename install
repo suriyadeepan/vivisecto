@@ -7,7 +7,7 @@ echo
 #
 ##################
 if [ -f /etc/debian_version ]; then 
-    sudo apt-get install libopencv-*
+    sudo apt-get install libopencv-core* libopencv-highgui* libopencv-imgproc* 
 elif [ -f /etc/redhat-release ]; then 
     sudo dnf install opencv
 else 
