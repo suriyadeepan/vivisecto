@@ -111,7 +111,7 @@ int main(int argc, char** argv){
 
 	// index events.mono 
 	SIM_STEPS = index_index(filename);
-	printf("\nSIM_STEPS : %d",SIM_STEPS);
+	printf("\n>> Simulation time : %d",SIM_STEPS);
 
 	// open index file in RO mode
 	ifp = fopen(ifilename,"r");
@@ -121,6 +121,10 @@ int main(int argc, char** argv){
 
   for (int i = 0; i < node_count; i++)
 		nodes[i] = NULL;
+
+	// set the event_skip_precision
+	double event_skip_precision = 0.00001 * (int)(node_count/10);
+	printf("\n>> Precision set to %lf\n",event_skip_precision);
 
 	// init view
 	view_x4(&view_map,SIM_DIX,SIM_DIY);
@@ -156,7 +160,7 @@ int main(int argc, char** argv){
 			}
 
 			// skip frames
-			if(sim_t - sim_prev > 0.001){
+			if(sim_t - sim_prev > event_skip_precision){
 
 				// redraw View
 				view_map.copyTo(view);
