@@ -1,12 +1,11 @@
-#ViVi
-#####
+# ViVi
 
 A light-weight visualizer for [Castalia](https://castalia.forge.nicta.com.au/index.php/en/). Based on MVC pattern, uses opencv's graphics capabilites for displaying events in a simulated sensor network environment. Events include node movement, radio transmission, reception and dynamic clustering. 
 
 ![alt tag](https://raw.githubusercontent.com/suriyadeepan/vivisecto/master/screenshots/screenshot.png)
 
-##Installation
-#####Run the install script
+## Installation
+##### Run the install script
 
 ```bash
 cd path/to/vivisecto/
@@ -17,7 +16,7 @@ source ~/.bashrc
 echo $VIVI_SRC
 ```
 
-##Running Vivi
+## Running Vivi
 ```bash
 # Enter the Castalia Simulation folder
 cd /path/to/Castalia/Simulations/ScenarioName/
@@ -27,8 +26,8 @@ cd /path/to/Castalia/Simulations/ScenarioName/
 vivi
 ```
 
-##Contribution
-#####To contribute please follow these steps
+## Contribution
+##### To contribute please follow these steps
 
 1. Fork the repo
 2. Write clear [commit messages](https://github.com/erlang/otp/wiki/Writing-good-commit-messages)
